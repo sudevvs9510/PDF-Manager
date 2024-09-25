@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 
-const NavBar = () => {
+const Navbar = () => {
   const navigate = useNavigate(); 
   const token = localStorage.getItem('token'); 
 
@@ -51,4 +51,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;

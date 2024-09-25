@@ -1,6 +1,6 @@
 //@ts-nocheck
 import React, { useState, useContext } from 'react';
-import NavBar from './NavBar';
+import NavBar from './Navbar';
 import MainLayout from './MainLayout';
 import SaveUploadPdf from './SaveUploadPdf';
 import { motion } from 'framer-motion';
