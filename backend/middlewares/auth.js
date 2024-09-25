@@ -11,7 +11,7 @@ const verifyToken = (req, res, next) => {
       if (err) {
         return res.status(403).json({ error: "Invalid token" });
       }
-      req.userId = decoded.userId; // Save user ID for later use
+      req.userId = decoded.userId; 
       next();
     });
   } catch (error) {
