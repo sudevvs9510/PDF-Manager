@@ -4,6 +4,8 @@ import connectDB from './config/database.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import dotenv from 'dotenv'
+
 import userRoutes from './routes/userRoutes.js';
 import pdfRoutes from './routes/pdfRoutes.js';
 
@@ -12,10 +14,13 @@ import pdfRoutes from './routes/pdfRoutes.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+dotenv.config();
+
 const app = express();
 
 app.use(cors({
-  origin: process.env.ORIGIN,
+  // origin: "http://localhost:5000",
+  origin: process.env.ORIGIN 
 
 }));
 app.use(express.json());
