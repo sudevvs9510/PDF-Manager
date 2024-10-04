@@ -18,7 +18,7 @@ const PDFView = () => {
     <div className="flex justify-center items-center min-h-screen">
       {file ? (
         <iframe
-          src={`http://localhost:4000/uploads/${fileName}`}
+          src={`${import.meta.env.VITE_API_BASE_URL}/uploads/${fileName}`}
           width="100%"
           height="775px"
           title="PDF Viewer"
