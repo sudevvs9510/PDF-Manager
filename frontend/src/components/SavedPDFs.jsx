@@ -4,10 +4,13 @@ import authAxios from '../api/api';
 import { UserContext } from '../routes/UserContext';
 import pdfBackground from '../assets/pdfbackground.jpg';
 import { FaFilePdf } from 'react-icons/fa';
+import Loader from './Loader';
+import Navbar from './Navbar'; // Import the Navbar component
 
 const SavedPDFs = () => {
   const [pdfList, setPdfList] = useState([]);
   const [userName, setUserName] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const { currentUser } = useContext(UserContext);
   const [error, setError] = useState('');
 
@@ -19,15 +22,16 @@ const SavedPDFs = () => {
     } catch (error) {
       console.error('Error fetching PDFs:', error);
       setError('Failed to fetch PDFs.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   // Function to fetch user data
   const fetchUserData = async () => {
     try {
-      const response = await authAxios.get(`/user/user-datas/${currentUser}`); // Adjust the endpoint as needed
+      const response = await authAxios.get(`/user/user-datas/${currentUser}`);
       setUserName(response.data.username);
-      console.log(response.data)
     } catch (error) {
       console.error('Error fetching user data:', error);
       setError('Failed to fetch user data.');
@@ -36,12 +40,20 @@ const SavedPDFs = () => {
 
   useEffect(() => {
     if (currentUser) {
-      fetchPDFs();
       fetchUserData();
+      fetchPDFs();
     }
   }, [currentUser]);
 
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
+    <div>
+    {/* Add the Navbar component */}
+    <Navbar />
+
     <div className="p-6 shadow-lg flex flex-col min-h-screen relative"
       style={{
         backgroundImage: `url(${pdfBackground})`,
@@ -49,7 +61,9 @@ const SavedPDFs = () => {
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}
+      
     >
+      
       <div className='bg-white bg-opacity-75 h-screen rounded-lg p-5 overflow-y-auto'>
         <h2 className="flex text-violet-700 justify-center text-3xl font-bold mb-4">
           PDF Collection of {userName ? userName.charAt(0).toUpperCase() + userName.slice(1) : "User"}
@@ -81,6 +95,7 @@ const SavedPDFs = () => {
           <p>No PDFs saved for this user.</p>
         )}
       </div>
+    </div>
     </div>
   );
 };
