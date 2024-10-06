@@ -47,7 +47,7 @@ const Home = () => {
 
         {/* Only show "Saved PDF" button if user is logged in */}
         {/* {currentUser && ( */}
-          <Link to={`/saved-pdfs/${currentUser}`}>
+          <Link to={`/saved-pdfs/${localStorage.getItem("userId")}`}>
             <button className="flex items-center p-4 rounded-md bg-violet-500 text-white hover:bg-violet-400 transition-colors duration-300">
               <FaFilePdf className="mr-2" />
               Saved PDF

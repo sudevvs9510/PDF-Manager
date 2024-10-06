@@ -8,7 +8,10 @@ import toast from 'react-hot-toast';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [userData, setUserData] = useState([])
   const navigate = useNavigate();
+
+  console.log("USERDATA:",userData)
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address').required('Email is required'),
@@ -20,6 +23,8 @@ const Login = () => {
       const response = await authAxios.post('/user/login', values);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('userId', response.data.userId);
+      setUserData(response.data)
+      console.log(response)
       toast.success("Login successful")
       navigate('/');
     } catch (error) {
@@ -28,6 +33,7 @@ const Login = () => {
     }
     setSubmitting(false);
   };
+  
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
