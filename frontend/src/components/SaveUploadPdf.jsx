@@ -60,10 +60,7 @@ const FileUploadAndSave = () => {
         },
       });
 
-      // Show success toast
       toast.success('Files uploaded successfully!');
-
-      // Clear file selection and titles
       setUploadedFiles([]);
       setFileTitles({});
     } catch (error) {
@@ -74,13 +71,12 @@ const FileUploadAndSave = () => {
         toast.error('Error uploading files');
       }
     } finally {
-      setLoading(false); // Hide loader once the process finishes
+      setLoading(false); 
     }
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Toaster /> {/* Add Toaster to display toast messages */}
 
       <h1 className="text-3xl font-bold mb-8 text-center">Save PDF</h1>
 
